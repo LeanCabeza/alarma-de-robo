@@ -15,6 +15,18 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'splash',
+    loadChildren: () => import('./paginas/splash/splash.module').then( m => m.SplashPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./paginas/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./paginas/login/login.module').then( m => m.LoginPageModule)
+  },
 ];
 
 @NgModule({
