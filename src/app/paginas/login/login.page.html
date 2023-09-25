@@ -1,13 +1,82 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<div class="main">
+  <ion-content [fullscreen]="true" overflow-scroll="false" class="contenedor">
+  
+    <ion-content class="ion-padding">
+      <ion-fab slot="fixed" vertical="top" horizontal="start">
+        <ion-fab-button>
+          <ion-icon name="chevron-forward-circle"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="end">
+          <ion-fab-button>
+            <ion-fab-button color="tertiary" (click)="CargaUsuarios(1)">
+              <img src="/assets/images/user1.png">
+            </ion-fab-button>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-fab-button (click)="CargaUsuarios(2)">
+              <img src="/assets/images/user2.png" alt="">
+            </ion-fab-button>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-fab-button (click)="CargaUsuarios(3)">
+              <img src="/assets/images/user3.png" alt="">
+            </ion-fab-button>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </ion-content>
+    <ion-card class="card" color="light" style="margin-top: 28%;">
+      <img class="gif" src="/assets/images/icon.png"/>
+      <ion-card-content>
+        <form (submit)="Login()">
+          <ion-item class="ion-item">
+            <ion-icon name="person" class="icon-login"></ion-icon>
+            <ion-input class="ionput" aria-label="Correo" [formControl]="correo" [clearOnEdit]="true" type="email"
+              required placeholder="Correo" errorText="Correo invalido" helperText="Ingrese un correo valido"
+              full></ion-input>
+          </ion-item>
+          <div class="alert alert-danger mensajeError mt-1 bi bi-exclamation-octagon-fill"
+            [hidden]="correo.valid || (correo.pristine && correo.untouched)">
+  
+            <span *ngIf="correo.errors?.['required']">
+              Este campo es obligatorio
+            </span>
+  
+            <span *ngIf="correo.errors?.['email']">
+              Debe contener @
+            </span>
+          </div>
+          <br>
+          <ion-item class="ion-item">
+            <ion-icon name="key" class="icon-login"></ion-icon>
+            <ion-input class="ionput"  [formControl]="password" aria-label="Contraseña" [clearOnEdit]="true" type="password" required
+              placeholder="Contraseña" [counter]="true" maxlength="8"
+              errorText="Contraseña incorrecta" full></ion-input>
+          </ion-item>
+  
+          <div class="alert alert-danger mensajeError mt-1 bi bi-exclamation-octagon-fill"
+            [hidden]="password.valid || (password.pristine && password.untouched)">
+  
+            <span *ngIf="password.errors?.['required']">
+              Este campo es obligatorio
+            </span>
+  
+            <span *ngIf="password.errors?.['minlength']">
+              Debe tener como minimo 6 caracteres
+            </span>
+  
+          </div>
+          <br>
+          <div>
+            <ion-button expand="block" type="submit"> Ingresar </ion-button>
+          </div>
+  
+        </form>
+      </ion-card-content>
+    </ion-card>
+    
+    <div *ngIf="showSpinner" class="custom-spinner">
+      <img src="/assets/images/icon.png"/>
+    </div>
+  </ion-content>
+  </div>
