@@ -1,0 +1,7 @@
+{
+  "name": "AlarmaDeRobo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
