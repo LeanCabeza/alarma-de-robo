@@ -1,13 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content noscroll>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <!-- Establece el tamaño del botón -->
+    <ion-fab-button (click)="desactivarAlarma(true)" color="danger" size="large">
+      <!-- Agrega aquí el icono o texto para cerrar sesión -->
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="btnImage">
+    <h1  *ngIf="!alarmActivated">Activar Alarma</h1>
+    <h1  *ngIf="alarmActivated">Desactivar Alarma</h1>
+    <img *ngIf="!alarmActivated" src="/assets/images/icon.png"  (click)="activarAlarma()">
+    <img *ngIf="alarmActivated" src="/assets/images/key.png" (click)="desactivarAlarma(false)">
+  </div>
 </ion-content>

@@ -9,24 +9,23 @@
         <ion-fab-list side="end">
           <ion-fab-button>
             <ion-fab-button color="tertiary" (click)="CargaUsuarios(1)">
-              <img src="/assets/images/user1.png">
+              <img src="/assets/images/user2.png">
             </ion-fab-button>
           </ion-fab-button>
           <ion-fab-button>
             <ion-fab-button (click)="CargaUsuarios(2)">
-              <img src="/assets/images/user2.png" alt="">
+              <img src="/assets/images/user3.png" alt="">
             </ion-fab-button>
           </ion-fab-button>
           <ion-fab-button>
             <ion-fab-button (click)="CargaUsuarios(3)">
-              <img src="/assets/images/user3.png" alt="">
+              <img src="/assets/images/user1.png" alt="">
             </ion-fab-button>
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
     </ion-content>
-    <ion-card class="card" color="light" style="margin-top: 28%;">
-      <img class="gif" src="/assets/images/icon.png"/>
+    <ion-card class="card" color="dark" style="margin-top: 28%;">
       <ion-card-content>
         <form (submit)="Login()">
           <ion-item class="ion-item">
@@ -73,6 +72,8 @@
   
         </form>
       </ion-card-content>
+      <img class="gif" src="/assets/images/login.png"/>
+
     </ion-card>
     
     <div *ngIf="showSpinner" class="custom-spinner">

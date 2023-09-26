@@ -1,0 +1,83 @@
+ion-content {
+  --background: black;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+h1 {
+  color: white;
+  font-family: "Mokoto";
+  text-shadow: 0 0 3px red, 0 0 5px #0000FF;
+}
+
+.btnImage {
+  background-image: url('/assets/images/background.jpg'); /* Cambia 'ruta/de/imagen.jpg' a la ubicación de tu imagen de fondo */
+  background-repeat: no-repeat;
+  background-size: cover; /* Ajusta el tamaño de la imagen de fondo */
+  background-position: center center;
+  height: 80vh;
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid white; /* Agregamos un borde blanco de 2px */
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transiciones para sombra y transform */
+  &:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  &:active {
+    transform: translate(-50%, -50%) scale(1.1); // Escalamos el botón cuando se hace clic
+  }
+}
+
+.btnImage img {
+  display: block; /* Esto evita cualquier espacio adicional debajo de la imagen */
+  margin: auto; /* Centra la imagen horizontalmente en el div */
+  max-width: 100%; /* Ajusta el tamaño máximo de la imagen al ancho del div */
+  height: auto; /* Permite que la altura se ajuste automáticamente al ancho */
+  margin-top: 35%;
+}
+
+  // Spinner
+  .custom-spinner img {
+    animation: rotate-center 1s ease-in-out infinite both;
+    max-width: 200px;
+    height: 200px;
+    opacity: 1;
+  }
+  
+  .custom-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    background-color: rgba(91, 91, 91, 0.601);
+    background-repeat: no-repeat;
+    background-size: 150px;
+    background-position: center;
+  }
+  
+  .spinnerh1 {
+    font-family: 'Righteous', cursive;
+    position: absolute;
+    top: 200px;
+    font-size: 40px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }

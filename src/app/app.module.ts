@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { Flashlight } from '@awesome-cordova-plugins/flashlight/ngx';
+import { Vibration } from '@awesome-cordova-plugins/vibration/ngx';
+import { DeviceMotion} from '@awesome-cordova-plugins/device-motion/ngx';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,7 +23,7 @@ const firebaseConfig = {
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(firebaseConfig),AngularFireAuthModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Flashlight, Vibration, ScreenOrientation, DeviceMotion],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
