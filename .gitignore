@@ -12,7 +12,6 @@ $RECYCLE.BIN/
 *.log
 log.txt
 
-
 /.sourcemaps
 /.versions
 /coverage
@@ -62,6 +61,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+/android
 
 # System files
 .DS_Store

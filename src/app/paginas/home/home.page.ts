@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Flashlight } from '@awesome-cordova-plugins/flashlight/ngx';
 import { Vibration } from '@awesome-cordova-plugins/vibration/ngx';
-import { DeviceMotion, DeviceMotionAccelerationData} from '@awesome-cordova-plugins/device-motion/ngx';
+import { DeviceMotion, DeviceMotionAccelerationData } from '@awesome-cordova-plugins/device-motion/ngx';
 import { NavController } from '@ionic/angular';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
@@ -11,13 +11,13 @@ import Swal from 'sweetalert2';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  alarmActivated: boolean = false;
-  passwordUser: string = '';
+export class HomePage implements OnDestroy {
+  alarmActivated = false;
+  passwordUser = '';
 
-  accelerationX: any;
-  accelerationY: any;
-  accelerationZ: any;
+  accelerationX: number | null = null;
+  accelerationY: number | null = null;
+  accelerationZ: number | null = null;
   subscription: any;
 
   audioIzquierda = '/assets/sounds/izquierda.mp3';
@@ -27,8 +27,8 @@ export class HomePage {
   audioPass = '/assets/sounds/wrongPass.mp3';
   audio = new Audio();
 
-  firstAdmission: boolean = true;
-  firstAdmissionFlash: boolean = true;
+  firstAdmission = true;
+  firstAdmissionFlash = true;
 
   currentPositionCellPhone = 'actual';
   previousPositionCellPhone = 'anterior';
@@ -43,12 +43,15 @@ export class HomePage {
     public navCtrl: NavController,
     private firebaseService: FirebaseService
   ) {
-    this.currentUser = localStorage.getItem("correo");
-    this.currentPass = localStorage.getItem("password");
-    
+    this.currentUser = localStorage.getItem('correo');
+    this.currentPass = localStorage.getItem('password');
   }
 
-  ngOnInit() {
+  ngOnInit(){
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   logoutUser() {
@@ -57,14 +60,14 @@ export class HomePage {
 
   activarAlarma() {
     Swal.fire({
-      title: 'Estas seguro de que activar la alarma?',
-      text: "Para desactivar vamos a necesitar la pass eh!",
+      title: '¿Estás seguro de activar la alarma?',
+      text: 'Para desactivarla, necesitarás la contraseña.',
       icon: 'warning',
       heightAuto: false,
       showCancelButton: true,
       confirmButtonColor: 'green',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Activar'
+      confirmButtonText: 'Activar',
     }).then((result) => {
       if (result.isConfirmed) {
         this.alarmActivated = true;
@@ -72,45 +75,47 @@ export class HomePage {
         Swal.fire({
           title: 'Alarma Activada',
           icon: 'success',
-          heightAuto: false
+          heightAuto: false,
         });
       }
-    })
+    });
   }
 
   desactivarAlarma(redirect: boolean) {
-      Swal.fire({
-        title: 'Porfavor Ingresa tu contraseña',
-        input: 'password',
-        heightAuto: false,
-        inputAttributes: {
-          autocapitalize: 'off'
-        },
-        showCancelButton: true,
-        confirmButtonText: 'Desactivar',
-        showLoaderOnConfirm: true,
-        preConfirm: (passInput) => {
-          if(this.currentPass == passInput)
-          {
-            if(redirect == false){
-              this.alarmActivated = false;
-              this.subscription.unsubscribe();
-              this.audio.pause();
-              Swal.fire({
-                title: `Alarma Desactivada!`,
-                icon: 'success',
-                heightAuto: false
-              });
-            }else{
-              this.firebaseService.logout();
-            }
-          }else{ 
-            Swal.showValidationMessage(`Contraseña Invalida!`);
-            this.passIncorrecta();
+    Swal.fire({
+      title: 'Por favor, ingresa tu contraseña',
+      input: 'password',
+      heightAuto: false,
+      inputAttributes: {
+        autocapitalize: 'off',
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Desactivar',
+      showLoaderOnConfirm: true,
+      preConfirm: (passInput) => {
+        if (this.currentPass == passInput) {
+          if (!redirect) {
+            Swal.fire({
+              title: 'Alarma Desactivada',
+              icon: 'success',
+              heightAuto: false,
+            });
+            this.audio.pause();
+            this.alarmActivated = false;
+            this.subscription.unsubscribe();
+          } else {
+            this.firebaseService.logout();
+            this.audio.pause();
+            this.alarmActivated = false;
+            this.subscription.unsubscribe();
           }
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-      })
+        } else {
+          Swal.showValidationMessage('Contraseña incorrecta');
+          this.passIncorrecta();
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
   }
 
   alarmaActivada() {
@@ -122,7 +127,6 @@ export class HomePage {
         this.accelerationZ = Math.floor(acceleration.z);
 
         if (acceleration.x > 5) {
-
           this.currentPositionCellPhone = 'izquierda';
           this.movimientoIzquierda();
         } else if (acceleration.x < -5) {
@@ -157,9 +161,8 @@ export class HomePage {
     this.firstAdmission ? null : this.vibration.vibrate(5000);
     this.firstAdmission = true;
 
-
     if (this.firstAdmissionFlash) {
-      this.firstAdmissionFlash ? this.flashlight.switchOn() : false;
+      this.firstAdmissionFlash ? this.flashlight.toggle() : false;
       setTimeout(() => {
         this.firstAdmissionFlash = true;
         this.flashlight.switchOff();
@@ -209,7 +212,7 @@ export class HomePage {
     this.firstAdmissionFlash = true;
   }
 
-  logout(){
+  logout() {
     this.firebaseService.logout();
   }
 }

@@ -43,6 +43,8 @@ ion-fab-button{
     position: fixed;
     margin-top: 50px;
     box-shadow: 2px 40px 50px rgba(1, 1, 1, 0.5);
+    background: rgb(56,55,55);
+    background: linear-gradient(180deg, rgba(56,55,55,1) 6%, rgba(0,0,0,1) 52%, rgba(0,0,0,1) 70%);
   }
   
   ion-card-content {
