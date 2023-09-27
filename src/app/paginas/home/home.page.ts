@@ -1,10 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Flashlight } from '@awesome-cordova-plugins/flashlight/ngx';
 import { Vibration } from '@awesome-cordova-plugins/vibration/ngx';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@awesome-cordova-plugins/device-motion/ngx';
 import { NavController } from '@ionic/angular';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
+import { Flashlight } from '@ionic-native/flashlight/ngx';
 
 @Component({
   selector: 'app-home',

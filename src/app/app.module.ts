@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
-import { Flashlight } from '@awesome-cordova-plugins/flashlight/ngx';
+import { Flashlight } from '@ionic-native/flashlight/ngx';
 import { Vibration } from '@awesome-cordova-plugins/vibration/ngx';
 import { DeviceMotion} from '@awesome-cordova-plugins/device-motion/ngx';
 
