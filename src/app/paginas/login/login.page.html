@@ -1,36 +1,23 @@
 <div class="main">
   <ion-content [fullscreen]="true" overflow-scroll="false" class="contenedor">
-  
-    <ion-content class="ion-padding">
-      <ion-fab slot="fixed" vertical="top" horizontal="start">
-        <ion-fab-button>
-          <ion-icon name="chevron-forward-circle"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-list side="end">
-          <ion-fab-button>
-            <ion-fab-button color="tertiary" (click)="CargaUsuarios(1)">
-              <img src="/assets/images/user2.png">
-            </ion-fab-button>
-          </ion-fab-button>
-          <ion-fab-button>
-            <ion-fab-button (click)="CargaUsuarios(2)">
-              <img src="/assets/images/user3.png" alt="">
-            </ion-fab-button>
-          </ion-fab-button>
-          <ion-fab-button>
-            <ion-fab-button (click)="CargaUsuarios(3)">
-              <img src="/assets/images/user1.png" alt="">
-            </ion-fab-button>
-          </ion-fab-button>
-        </ion-fab-list>
-      </ion-fab>
-    </ion-content>
+    <ion-segment value="default">
+      <ion-segment-button value="admin" (click)="CargaUsuarios(1)">
+        <ion-label style="font-size: 13px;font-family: Mokoto;" >Admin</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="user" (click)="CargaUsuarios(2)">
+        <ion-label style="font-size: 13px;font-family: Mokoto;">Usuario</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="guest" (click)="CargaUsuarios(3)">
+        <ion-label style="font-size: 12px;font-family: Mokoto;">Invitado</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
     <ion-card class="card" style="margin-top: 28%;">
       <ion-card-content>
         <form (submit)="Login()">
           <ion-item class="ion-item">
             <ion-icon name="person" class="icon-login"></ion-icon>
-            <ion-input class="ionput" aria-label="Correo" [formControl]="correo" [clearOnEdit]="true" type="email"
+            <ion-input style="font-size: 20px;font-family: Mokoto;" class="ionput" aria-label="Correo" [formControl]="correo" [clearOnEdit]="true" type="email"
               required placeholder="Correo" errorText="Correo invalido" helperText="Ingrese un correo valido"
               full></ion-input>
           </ion-item>
@@ -48,7 +35,7 @@
           <br>
           <ion-item class="ion-item">
             <ion-icon name="key" class="icon-login"></ion-icon>
-            <ion-input class="ionput"  [formControl]="password" aria-label="Contraseña" [clearOnEdit]="true" type="password" required
+            <ion-input  style="font-size: 20px;font-family: Mokoto;" class="ionput"  [formControl]="password" aria-label="Contraseña" [clearOnEdit]="true" type="password" required
               placeholder="Contraseña" [counter]="true" maxlength="8"
               errorText="Contraseña incorrecta" full></ion-input>
           </ion-item>
@@ -67,7 +54,7 @@
           </div>
           <br>
           <div>
-            <ion-button expand="block" type="submit"> Ingresar </ion-button>
+            <ion-button style="font-family: Mokoto; font-size: 20px;" expand="block" type="submit"> Ingresar </ion-button>
           </div>
   
         </form>

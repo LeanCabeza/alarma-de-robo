@@ -60,6 +60,10 @@ ion-fab-button{
     border: 3px solid #ffffff;
     border-radius: 20px;
   }
+
+  ion-segment {
+    --background: violet;
+  }
   
   .ionput {
     height: 60px;
